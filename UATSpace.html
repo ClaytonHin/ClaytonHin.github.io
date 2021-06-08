@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--UATSpace Page
+    written by: Clayton Hinderline
+    Claytonhinderline@gmail.com
+    10May2021-->
+<html>
+
+<head>
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <!--Coloring My website-->
+    <script src="Code.js"></script>
+    <script src="dataLoader-1.js"></script> <!--Links the dataLoader to the html page-->
+    <title>
+        Clayton's UATSpace Page
+    </title>
+</head>
+
+<body>
+    <!--needed for the DOM--> 
+    <script>
+        //create some needed variables
+        var theTime = new Date(); //Returns date and time
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_interation = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        //to getDate for our table
+        var data = getData();
+        
+        //data from dataloader() to our table
+        function updateDisplay(){
+            theTime = new Date();
+            
+        //fills in the table
+        var timeRead = data[index].time_seconds;
+        console.log("made it here");
+        if(timeRead >= 10){
+         document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds"); //Writes the information from the first row
+         document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+         document.getElementById("data").rows["longitude"].innerHTML = dataRow("longitude", data[index].longitude, " ");
+         document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("gps altitude", data[index].gps_altitude, " ");
+         document.getElementById("data").rows["bmpSensor_altitude"].innerHTML = dataRow("bmp Sensor altitude", data[index].bmpSensor_altitude, " ");
+         document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("bmp Sensor pressure", data[index].bmpSensor_pressure, " ");
+         document.getElementById("data").rows["bmpSensor_temperature"].innerHTML = dataRow("bmp Sensor temperature", data[index].bmpSensor_temperature, " ");
+         document.getElementById("data").rows["cssSensor_temperature"].innerHTML = dataRow("css Sensor temperature", data[index].cssSensor_temperature, " ");
+         document.getElementById("data").rows["cssSensor_EC02"].innerHTML = dataRow("css Sensor EC02", data[index].cssSensor_EC02, " ");
+         document.getElementById("data").rows["cssSensor_TV0C"].innerHTML = dataRow("css Sensor TV0C", data[index].cssSensor_TV0C, " ");
+         document.getElementById("data").rows["UV"].innerHTML = dataRow("UV", data[index].UV, " ");
+         document.getElementById("data").rows["accelX"].innerHTML = dataRow("accelX", data[index].accelX, " ");
+         document.getElementById("data").rows["accelY"].innerHTML = dataRow("accelY", data[index].accelY, " ");
+         document.getElementById("data").rows["accelZ"].innerHTML = dataRow("accelZ", data[index].accelZ, " ");
+         document.getElementById("data").rows["magneticX"].innerHTML = dataRow("magneticX", data[index].magneticX, " ");
+         document.getElementById("data").rows["magneticY"].innerHTML = dataRow("magneticY", data[index].magneticY, " ");
+         document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("magneticZ", data[index].magneticZ, " ");
+         document.getElementById("data").rows["gyroX"].innerHTML = dataRow("gyroX", data[index].gyroX, " ");
+         document.getElementById("data").rows["gyroY"].innerHTML = dataRow("gyroY", data[index].gyroY, " ");
+         document.getElementById("data").rows["gyroZ"].innerHTML = dataRow("gyroZ", data[index].gyroZ, " ");
+        }
+        if(index < 500){
+            index++
+        } else{
+            index = 0
+        }
+    }
+
+    </script>
+    <!--Making a table to hold h1 title and jpg-->
+    <table>
+        <td><img src="UATspaceLogo-2.jpg"></td>
+        <td>
+            <h1>
+                UAT Space Page
+            </h1>
+        </td>
+    </table>
+    <table border="2" width="70%" id="data">
+        <!--Changes the table border to 2 lines and forces the table to take up 70% of the screen-->
+        <col style="width: 35%;">
+        <!--Sets the width of the table -->
+        <col style="width: 35%;">
+        <thead>
+            <tr style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> <!--Sets the font of the title headers-->
+                <th>Data Type</th>
+                <th>Reading</th>
+            <tr>
+        </thead>
+        <tbody>
+            <tr id="seconds"></tr> 
+            <tr id="latitude"></tr> <!--Displays latitude in the left collumn and 0 in the right collumn -->
+            <tr id="longitude"></tr> <!--Displays longitude in the left collumn and 0 in the right collumn -->
+            <tr id="gps_altitude"></tr>
+            <tr id="bmpSensor_altitude"></tr>
+            <tr id="bmpSensor_pressure"></tr>
+            <tr id="bmpSensor_temperature"></tr>
+            <tr id="digSensor_temperature"></tr>
+            <tr id="cssSensor_temperature"></tr>
+            <tr id="cssSensor_EC02"></tr>
+            <tr id="cssSensor_TV0C"></tr>
+            <tr id="UV"></tr>
+            <tr id="accelX"></tr>
+            <tr id="accelY"></tr>
+            <tr id="accelZ"></tr>
+            <tr id="magneticX"></tr>
+            <tr id="magneticY"></tr>
+            <tr id="magneticZ"></tr>
+            <tr id="gyroX"></tr>
+            <tr id="gyroY"></tr>
+            <tr id="gyroZ"></tr>
+        </tbody>
+    </table>
+    <script>
+
+    </script>
+
+    <br>
+    <!--Adding a spaceing to the webpage-->
+    <p id="countdownTimer">Countdown Status...</p>
+    <!--Displays the Countdown timer-->
+
+    <button class="button" id="startButton" onclick="start();">Start</button> <!--Creates the id's for the start and stop button-->
+    <button class="button" id="stopButton" onclick="stop()">Stop</button>
+    <br>
+    <br>
+    <button class="button" onclick="playStation();">Play Sound</button><br>
+
+    <!--Adds a countdown button on the webpage-->
+    
+
+    <script>
+    //We do not need alert anymore
+    //alert("Test of the Alert function");
+    </script>
+
+    <!--Space for the craps game-->
+    <br>
+    <br>
+    <!--Spacers-->
+    <div id="die1Results">die1 status...</div><br>
+    <!--Displays you a result for die1-->
+    <div id="die2Results">die2 status...</div><br>
+    <!--Displays you a result for die2-->
+    <div id="sumResults">sum status...</div><br>
+    <!--Displays you a sum result of the 2 die-->
+    <div id="crapsResults">Craps game status...</div><br>
+    <!--Displays If you Lost/win or if you need to roll again-->
+    <button onclick="playCraps();">Play Craps</button><br>
+    <!--Adds a Play Craps Button On Webpage-->
+    <br>
+    <br>
+    <button class="button" onclick="indexTrans();">Go to index</button>; <!--Creates Buttons For Objectives Page, and the Index-->
+    <button class="button" onclick="objTrans();">Objectives</button>
+</body>
+
+
+
+</html>
